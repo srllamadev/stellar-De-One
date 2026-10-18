@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>De one - Remesas</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>De one<span>.</span></h1>
+        <p>Pagas en tu moneda. Le llega en la suya.</p>
+    </header>
+
+    <main>
+
+        <section class="tarjeta">
+            <h2>Enviar dinero</h2>
+
+            <p>Brasil (BRL) → Bolivia (BOB)</p>
+
+            <label for="destinatario">Destinatario</label>
+            <input type="text" id="destinatario" value="@maria" readonly>
+
+            <label for="monto">Monto a enviar (BRL)</label>
+            <input type="number" id="monto" value="500" min="1" step="0.01">
+
+            <button id="btnCotizar">
+                Ver cotización
+            </button>
+
+            <div id="resultadoCotizacion"></div>
+
+            <button id="btnEnviar" disabled>
+                Confirmar remesa simulada
+            </button>
+
+            <div id="resultadoEnvio"></div>
+
+            <div id="seccionPago" hidden>
+                <h3>Pago PIX de demostración</h3>
+
+                <p>
+                    Esta operación es una simulación.
+                    No se transferirá dinero real.
+                </p>
+
+                <button id="btnSimularPago" type="button">
+                    Confirmar pago PIX simulado
+                </button>
+
+                <p id="resultadoPago" aria-live="polite"></p>
+            </div>
+
+        </section>
+
+
+        <section class="tarjeta">
+            <h2>Consultar remesa</h2>
+
+            <label for="idRemesa">Número de remesa</label>
+            <input type="number" id="idRemesa" value="1" min="1">
+
+            <button id="btnConsultar">
+                Consultar remesa
+            </button>
+
+            <div id="resultado"></div>
+            <p class="nota-demo">
+    DEMOSTRACIÓN: los pagos PIX y los montos BOB son
+    simulados. Las transferencias Stellar se realizan
+    exclusivamente en Testnet.
+</p>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
