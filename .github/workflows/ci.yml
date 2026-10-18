@@ -1,0 +1,74 @@
+name: Bootstrap CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm run lint:web
+      - run: npm run typecheck:web
+      - run: npm run build:web
+
+  api:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: remesas_test
+          POSTGRES_USER: remesas_test
+          POSTGRES_PASSWORD: ci_test_only
+        ports: ["5433:5432"]
+        options: >-
+          --health-cmd "pg_isready -U remesas_test -d remesas_test"
+          --health-interval 5s --health-timeout 3s --health-retries 15
+    env:
+      DATABASE_URL: postgresql+psycopg://remesas_test:ci_test_only@localhost:5433/remesas_test
+      TEST_DATABASE_URL: postgresql+psycopg://remesas_test:ci_test_only@localhost:5433/remesas_test
+      APP_ENV: test
+      POLLAR_ENABLED: "false"
+      STELLAR_NETWORK: testnet
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.29"
+          enable-cache: true
+          cache-dependency-glob: apps/api/uv.lock
+      - run: uv sync --directory apps/api --frozen --python 3.12
+      - run: npm run lint:api
+      - run: npm run db:migrate
+      - run: uv run --directory apps/api alembic check
+      - run: npm run test:api
+      - run: uv run --directory apps/api alembic downgrade base
+      - run: npm run db:migrate
+
+  compose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: docker compose config --quiet
+      - run: docker compose up --build --wait --wait-timeout 240
+      - run: node scripts/smoke.mjs --require-ready
+      - name: Alembic in container
+        run: docker compose exec -T api uv run --no-sync alembic upgrade head
+      - if: failure()
+        run: docker compose logs
+      - if: always()
+        run: docker compose down

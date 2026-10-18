@@ -1,0 +1,144 @@
+remesas-latam/
+├── .dockerignore
+├── .editorconfig
+├── .env.example
+├── .gitattributes
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+├── .gitignore
+├── .nvmrc
+├── README.md
+├── apps/
+│   ├── api/
+│   │   ├── .dockerignore
+│   │   ├── .env.example
+│   │   ├── .python-version
+│   │   ├── Dockerfile
+│   │   ├── README.md
+│   │   ├── alembic.ini
+│   │   ├── alembic/
+│   │   │   ├── env.py
+│   │   │   ├── script.py.mako
+│   │   │   └── versions/
+│   │   │       └── 0001_bootstrap.py
+│   │   ├── app/
+│   │   │   ├── __init__.py
+│   │   │   ├── api/
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── v1/
+│   │   │   │       ├── __init__.py
+│   │   │   │       ├── endpoints/
+│   │   │   │       │   ├── __init__.py
+│   │   │   │       │   └── status.py
+│   │   │   │       └── router.py
+│   │   │   ├── core/
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── config.py
+│   │   │   │   └── database.py
+│   │   │   ├── domain/
+│   │   │   │   └── README.md
+│   │   │   ├── integrations/
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── pollar/
+│   │   │   │   │   └── __init__.py
+│   │   │   │   └── stellar/
+│   │   │   │       └── __init__.py
+│   │   │   ├── main.py
+│   │   │   ├── models/
+│   │   │   │   └── __init__.py
+│   │   │   ├── repositories/
+│   │   │   │   └── README.md
+│   │   │   ├── schemas/
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── status.py
+│   │   │   └── services/
+│   │   │       └── README.md
+│   │   ├── pyproject.toml
+│   │   ├── tests/
+│   │   │   ├── conftest.py
+│   │   │   ├── test_config.py
+│   │   │   ├── test_postgres.py
+│   │   │   └── test_status.py
+│   │   └── uv.lock
+│   └── web/
+│       ├── .env.example
+│       ├── .gitignore
+│       ├── AGENTS.md
+│       ├── Dockerfile
+│       ├── README.md
+│       ├── eslint.config.mjs
+│       ├── next.config.ts
+│       ├── package.json
+│       ├── public/
+│       │   ├── file.svg
+│       │   ├── globe.svg
+│       │   ├── next.svg
+│       │   ├── vercel.svg
+│       │   └── window.svg
+│       ├── src/
+│       │   ├── app/
+│       │   │   ├── favicon.ico
+│       │   │   ├── globals.css
+│       │   │   ├── layout.tsx
+│       │   │   └── page.tsx
+│       │   ├── components/
+│       │   │   ├── connection-status.tsx
+│       │   │   ├── layout/
+│       │   │   │   └── README.md
+│       │   │   └── ui/
+│       │   │       └── README.md
+│       │   ├── config/
+│       │   │   └── env.ts
+│       │   ├── features/
+│       │   │   ├── auth/
+│       │   │   │   └── README.md
+│       │   │   ├── dashboard/
+│       │   │   │   └── README.md
+│       │   │   ├── remittances/
+│       │   │   │   └── README.md
+│       │   │   ├── transactions/
+│       │   │   │   └── README.md
+│       │   │   └── wallet/
+│       │   │       └── README.md
+│       │   ├── hooks/
+│       │   │   └── README.md
+│       │   ├── lib/
+│       │   │   ├── api/
+│       │   │   │   ├── client.ts
+│       │   │   │   └── types.ts
+│       │   │   └── pollar/
+│       │   │       └── config.ts
+│       │   ├── providers/
+│       │   │   └── README.md
+│       │   └── types/
+│       │       └── README.md
+│       └── tsconfig.json
+├── compose.yaml
+├── docs/
+│   ├── BOOTSTRAP_REPORT.md
+│   ├── REPOSITORY_TREE.txt
+│   ├── api/
+│   │   └── README.md
+│   ├── architecture/
+│   │   └── README.md
+│   ├── integrations/
+│   │   └── pollar/
+│   │       └── README.md
+│   └── team/
+│       ├── TASKS.md
+│       └── WORKFLOW.md
+├── infra/
+│   ├── docker/
+│   │   └── README.md
+│   └── postgres/
+│       └── README.md
+├── package-lock.json
+├── package.json
+├── packages/
+│   └── contracts/
+│       └── README.md
+└── scripts/
+    ├── setup.mjs
+    ├── smoke.mjs
+    └── tree.mjs
